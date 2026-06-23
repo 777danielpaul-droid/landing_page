@@ -83,6 +83,26 @@
         height: 25px;
       }
 
+      /* --- Pfoten "Atmen" Animation --- */
+      @keyframes pawPulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(0.85);
+          opacity: 0.4;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+      }
+      .ghost-paw {
+        transform-origin: center;
+        animation: pawPulse 3s ease-in-out infinite;
+      }
+
       /* --- COMIC HUND ANIMATIONEN --- */
 
       /* Haupt-Ablaufsteuerung */
@@ -177,20 +197,31 @@
         }
       }
 
-      /* Das Sprechblasen-Herz beim Bellen */
-      @keyframes barkHeart {
+      /* Das Sprechblasen-Herz kombiniert Erscheinen, Aufsteigen und Atmen/Pulsieren */
+      @keyframes barkHeartCombined {
         0%,
         20%,
         38%,
         100% {
           opacity: 0;
-          transform: scale(0) translateY(0);
+          transform: translate(0, 0) scale(0);
         }
-        24%,
+        24% {
+          opacity: 1;
+          transform: translate(-5px, -12px) scale(1);
+        }
+        27% {
+          opacity: 1;
+          transform: translate(-5px, -15px) scale(0.8);
+        }
         30% {
           opacity: 1;
-          transform: scale(1) translateY(-25px);
-        } /* Etwas höher fliegen lassen */
+          transform: translate(-5px, -18px) scale(1.1);
+        }
+        34% {
+          opacity: 1;
+          transform: translate(-5px, -20px) scale(1);
+        }
       }
 
       /* ANIMATION FÜR DIE FRONTANSICHT (In der Mitte bei 60% bis 80%) */
@@ -238,8 +269,9 @@
         position: fixed;
         z-index: 999;
         width: 120px;
-        height: 120px;
+        height: 150px;
         animation: dogWalkScenario 18s linear infinite;
+        overflow: visible;
       }
 
       .dog-body-group {
@@ -262,7 +294,7 @@
       .bark-effect {
         fill: #ff1493;
         transform-origin: 30px 30px;
-        animation: barkHeart 18s linear infinite;
+        animation: barkHeartCombined 18s linear infinite;
       }
 
       .dog-tongue {
@@ -295,11 +327,11 @@
     <div class="comic-dog-container">
       <svg
         width="120"
-        height="120"
-        viewBox="0 0 100 100"
+        height="150"
+        viewBox="0 0 100 120"
         style="overflow: visible"
       >
-        <g class="dog-body-group">
+        <g class="dog-body-group" transform="translate(0, 25)">
           <path
             d="M 75 65 C 85 55, 90 60, 85 70"
             stroke="#d2b48c"
