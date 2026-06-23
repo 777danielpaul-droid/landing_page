@@ -98,7 +98,10 @@
           opacity: 0.8;
         }
       }
-      .ghost-paw {
+      /* Die Klasse liegt jetzt direkt auf dem SVG-Element */
+      .pulsing-paw-svg {
+        vertical-align: middle;
+        display: inline-block;
         transform-origin: center;
         animation: pawPulse 3s ease-in-out infinite;
       }
@@ -224,7 +227,7 @@
         }
       }
 
-      /* ANIMATION FÜR DIE FRONTANSICHT (In der Mitte bei 60% bis 80%) */
+      /* ANIMATION FÜR DIE FRONTANSICHT */
       @keyframes dogFaceFront {
         0%,
         59%,
@@ -350,7 +353,6 @@
               class="bark-effect"
               d="M30 30l-1.4-1.3C23.5 24 20 21 20 17.5c0-3 2.5-5.5 5.5-5.5 1.7 0 3.4.8 4.5 2 1.1-1.2 2.8-2 4.5-2 3 0 5.5 2.5 5.5 5.5 0 3.5-3.5 6.5-8.6 11.2L30 30z"
             />
-
             <g class="dog-head-profile">
               <circle cx="35" cy="50" r="18" fill="#f4a460" />
               <ellipse
@@ -416,12 +418,13 @@
       "
     >
       <svg
+        class="pulsing-paw-svg"
         width="60"
         height="60"
         viewBox="0 0 100 100"
-        style="vertical-align: middle; margin-right: 15px"
+        style="margin-right: 15px"
       >
-        <g class="ghost-paw">
+        <g>
           <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
           <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
           <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
@@ -438,12 +441,13 @@
       </h1>
 
       <svg
+        class="pulsing-paw-svg"
         width="60"
         height="60"
         viewBox="0 0 100 100"
-        style="vertical-align: middle; margin-left: 15px"
+        style="margin-left: 15px"
       >
-        <g class="ghost-paw">
+        <g>
           <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
           <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
           <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
