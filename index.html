@@ -139,7 +139,7 @@
         }
         16% {
           transform: rotate(0deg);
-        } /* Ruhig beim 1. Stopp */
+        }
         44% {
           transform: rotate(0deg);
         }
@@ -151,7 +151,7 @@
         }
         60% {
           transform: rotate(0deg);
-        } /* Ruhig beim 2. Stopp (Mitte) */
+        }
         79% {
           transform: rotate(0deg);
         }
@@ -189,8 +189,8 @@
         24%,
         30% {
           opacity: 1;
-          transform: scale(1) translateY(-20px);
-        }
+          transform: scale(1) translateY(-25px);
+        } /* Etwas höher fliegen lassen */
       }
 
       /* ANIMATION FÜR DIE FRONTANSICHT (In der Mitte bei 60% bis 80%) */
@@ -200,11 +200,11 @@
         81%,
         100% {
           opacity: 0;
-        } /* Unsichtbar, wenn er im Profil läuft */
+        }
         60%,
         80% {
           opacity: 1;
-        } /* Sichtbar beim Stopp in der Mitte */
+        }
       }
       @keyframes dogFaceProfile {
         0%,
@@ -212,14 +212,14 @@
         81%,
         100% {
           opacity: 1;
-        } /* Sichtbar im Profil */
+        }
         60%,
         80% {
           opacity: 0;
-        } /* Unsichtbar, wenn er nach vorne schaut */
+        }
       }
 
-      /* Zungen-Wechsel (fährt bei ca. 68% für eine Sekunde aus) */
+      /* Zungen-Wechsel */
       @keyframes tongueOut {
         0%,
         67%,
@@ -252,7 +252,6 @@
         animation: dogBark 18s linear infinite;
       }
 
-      /* Schaltet zwischen Profil und Frontansicht um */
       .view-profile {
         animation: dogFaceProfile 18s step-end infinite;
       }
@@ -294,7 +293,12 @@
     </svg>
 
     <div class="comic-dog-container">
-      <svg width="120" height="120" viewBox="0 0 100 100">
+      <svg
+        width="120"
+        height="120"
+        viewBox="0 0 100 100"
+        style="overflow: visible"
+      >
         <g class="dog-body-group">
           <path
             d="M 75 65 C 85 55, 90 60, 85 70"
