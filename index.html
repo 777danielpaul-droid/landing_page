@@ -85,7 +85,7 @@
 
       /* --- COMIC HUND ANIMATIONEN --- */
 
-      /* Das neue veränderte Drehbuch für den Hund */
+      /* Haupt-Ablaufsteuerung */
       @keyframes dogWalkScenario {
         0% {
           left: -150px;
@@ -96,12 +96,12 @@
           left: 40px;
           bottom: 10px;
           transform: scaleX(1);
-        } /* Erster Stopp links */
+        } /* 1. Stopp links */
         30% {
           left: 40px;
           bottom: 10px;
           transform: scaleX(1);
-        } /* Bleibt stehen und bellt */
+        } /* Bellt */
         40% {
           left: 40px;
           bottom: 10px;
@@ -112,24 +112,24 @@
           bottom: 10px;
           transform: scaleX(-1);
         } /* Dreht sich nach rechts um */
-        65% {
-          left: 60%;
+        60% {
+          left: 45%;
           bottom: 10px;
           transform: scaleX(-1);
-        } /* Läuft bis zur Mitte/Rechts */
+        } /* Läuft in die Mitte */
         80% {
-          left: 60%;
+          left: 45%;
           bottom: 10px;
           transform: scaleX(-1);
-        } /* ZWEITER STOPP: Bleibt noch mal stehen */
+        } /* 2. Stopp in der Mitte */
         100% {
           left: 110%;
           bottom: 10px;
           transform: scaleX(-1);
-        } /* Läuft aus dem Bild */
+        } /* Läuft rechts raus */
       }
 
-      /* Das Watscheln/Wackeln beim Laufen (pausiert bei beiden Stopps) */
+      /* Watscheln beim Laufen */
       @keyframes dogWaddle {
         0% {
           transform: rotate(-5deg);
@@ -145,25 +145,25 @@
         }
         45% {
           transform: rotate(-5deg);
-        } /* Läuft wieder */
-        64% {
+        }
+        59% {
           transform: rotate(5deg);
         }
-        65% {
+        60% {
           transform: rotate(0deg);
-        } /* Ruhig beim 2. Stopp */
+        } /* Ruhig beim 2. Stopp (Mitte) */
         79% {
           transform: rotate(0deg);
         }
         80% {
           transform: rotate(-5deg);
-        } /* Läuft zum Ausgang */
+        }
         100% {
           transform: rotate(5deg);
         }
       }
 
-      /* Kopf hochnehmen zum Bellen (nur beim 1. Stopp aktiv) */
+      /* Kopf hochnehmen zum Bellen (nur beim 1. Stopp) */
       @keyframes dogBark {
         0%,
         18%,
@@ -193,13 +193,53 @@
         }
       }
 
+      /* ANIMATION FÜR DIE FRONTANSICHT (In der Mitte bei 60% bis 80%) */
+      @keyframes dogFaceFront {
+        0%,
+        59%,
+        81%,
+        100% {
+          opacity: 0;
+        } /* Unsichtbar, wenn er im Profil läuft */
+        60%,
+        80% {
+          opacity: 1;
+        } /* Sichtbar beim Stopp in der Mitte */
+      }
+      @keyframes dogFaceProfile {
+        0%,
+        59%,
+        81%,
+        100% {
+          opacity: 1;
+        } /* Sichtbar im Profil */
+        60%,
+        80% {
+          opacity: 0;
+        } /* Unsichtbar, wenn er nach vorne schaut */
+      }
+
+      /* Zungen-Wechsel (fährt bei ca. 68% für eine Sekunde aus) */
+      @keyframes tongueOut {
+        0%,
+        67%,
+        74%,
+        100% {
+          transform: scaleY(0);
+        }
+        69%,
+        72% {
+          transform: scaleY(1);
+        }
+      }
+
       /* Hund Container */
       .comic-dog-container {
         position: fixed;
         z-index: 999;
         width: 120px;
         height: 120px;
-        animation: dogWalkScenario 18s linear infinite; /* Zeit leicht erhöht für den extra Stopp */
+        animation: dogWalkScenario 18s linear infinite;
       }
 
       .dog-body-group {
@@ -207,15 +247,28 @@
         animation: dogWaddle 18s linear infinite;
       }
 
-      .dog-head {
+      .dog-head-profile {
         transform-origin: 45px 55px;
         animation: dogBark 18s linear infinite;
+      }
+
+      /* Schaltet zwischen Profil und Frontansicht um */
+      .view-profile {
+        animation: dogFaceProfile 18s step-end infinite;
+      }
+      .view-front {
+        animation: dogFaceFront 18s step-end infinite;
       }
 
       .bark-effect {
         fill: #ff1493;
         transform-origin: 30px 30px;
         animation: barkHeart 18s linear infinite;
+      }
+
+      .dog-tongue {
+        transform-origin: 35px 56px;
+        animation: tongueOut 18s ease-in-out infinite;
       }
     </style>
 
@@ -242,11 +295,6 @@
 
     <div class="comic-dog-container">
       <svg width="120" height="120" viewBox="0 0 100 100">
-        <path
-          class="bark-effect"
-          d="M30 30l-1.4-1.3C23.5 24 20 21 20 17.5c0-3 2.5-5.5 5.5-5.5 1.7 0 3.4.8 4.5 2 1.1-1.2 2.8-2 4.5-2 3 0 5.5 2.5 5.5 5.5 0 3.5-3.5 6.5-8.6 11.2L30 30z"
-        />
-
         <g class="dog-body-group">
           <path
             d="M 75 65 C 85 55, 90 60, 85 70"
@@ -261,19 +309,55 @@
           <ellipse cx="70" cy="85" rx="6" ry="10" fill="#f4a460" />
           <ellipse cx="45" cy="85" rx="6" ry="10" fill="#f4a460" />
 
-          <g class="dog-head">
-            <circle cx="35" cy="50" r="18" fill="#f4a460" />
-            <ellipse
-              cx="48"
-              cy="52"
-              rx="6"
-              ry="14"
-              fill="#cd853f"
-              transform="rotate(10 48 52)"
+          <g class="view-profile">
+            <path
+              class="bark-effect"
+              d="M30 30l-1.4-1.3C23.5 24 20 21 20 17.5c0-3 2.5-5.5 5.5-5.5 1.7 0 3.4.8 4.5 2 1.1-1.2 2.8-2 4.5-2 3 0 5.5 2.5 5.5 5.5 0 3.5-3.5 6.5-8.6 11.2L30 30z"
             />
-            <ellipse cx="22" cy="54" rx="8" ry="6" fill="#ffdeb4" />
-            <circle cx="16" cy="52" r="3" fill="#000" />
-            <circle cx="28" cy="46" r="2.5" fill="#000" />
+
+            <g class="dog-head-profile">
+              <circle cx="35" cy="50" r="18" fill="#f4a460" />
+              <ellipse
+                cx="48"
+                cy="52"
+                rx="6"
+                ry="14"
+                fill="#cd853f"
+                transform="rotate(10 48 52)"
+              />
+              <ellipse cx="22" cy="54" rx="8" ry="6" fill="#ffdeb4" />
+              <circle cx="16" cy="52" r="3" fill="#000" />
+              <circle cx="28" cy="46" r="2.5" fill="#000" />
+            </g>
+          </g>
+
+          <g class="view-front">
+            <circle cx="35" cy="48" r="18" fill="#f4a460" />
+            <ellipse
+              cx="18"
+              cy="48"
+              rx="6"
+              ry="13"
+              fill="#cd853f"
+              transform="rotate(15 18 48)"
+            />
+            <ellipse
+              cx="52"
+              cy="48"
+              rx="6"
+              ry="13"
+              fill="#cd853f"
+              transform="rotate(-15 52 48)"
+            />
+            <ellipse cx="35" cy="54" rx="9" ry="6" fill="#ffdeb4" />
+            <ellipse cx="35" cy="51" rx="4" ry="2.5" fill="#000" />
+            <circle cx="28" cy="44" r="2.5" fill="#000" />
+            <circle cx="42" cy="44" r="2.5" fill="#000" />
+            <path
+              class="dog-tongue"
+              d="M32 55 h6 v6 a3 3 0 0 1 -6 0 z"
+              fill="#ff69b4"
+            />
           </g>
         </g>
       </svg>
