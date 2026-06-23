@@ -1,0 +1,463 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Adoption Agency</title>
+  </head>
+  <body
+    style="
+      background: url(&quot;https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&quot;)
+        no-repeat center center fixed;
+      background-size: cover;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      min-height: 100vh;
+    "
+  >
+    <style>
+      /* --- Herzen Animationen --- */
+      @keyframes heartPulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(0.85);
+          opacity: 0.2;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+      }
+      @keyframes floatUp {
+        0% {
+          top: 100%;
+          margin-left: 0px;
+        }
+        50% {
+          margin-left: 30px;
+        }
+        100% {
+          top: -10%;
+          margin-left: -30px;
+        }
+      }
+      .floating-heart {
+        position: fixed;
+        fill: #ff69b4;
+        pointer-events: none;
+        z-index: 1;
+        width: 30px;
+        height: 30px;
+      }
+      .heart1 {
+        left: 10%;
+        animation:
+          floatUp 14s linear infinite,
+          heartPulse 3s ease-in-out infinite;
+      }
+      .heart2 {
+        left: 25%;
+        animation:
+          floatUp 18s linear infinite 3s,
+          heartPulse 2.5s ease-in-out infinite;
+        width: 20px;
+        height: 20px;
+      }
+      .heart3 {
+        left: 75%;
+        animation:
+          floatUp 16s linear infinite 6s,
+          heartPulse 3.5s ease-in-out infinite;
+        width: 40px;
+        height: 40px;
+      }
+      .heart4 {
+        left: 85%;
+        animation:
+          floatUp 20s linear infinite 1s,
+          heartPulse 3s ease-in-out infinite;
+        width: 25px;
+        height: 25px;
+      }
+
+      /* --- COMIC HUND ANIMATIONEN --- */
+
+      /* Das neue veränderte Drehbuch für den Hund */
+      @keyframes dogWalkScenario {
+        0% {
+          left: -150px;
+          bottom: 10px;
+          transform: scaleX(1);
+        }
+        15% {
+          left: 40px;
+          bottom: 10px;
+          transform: scaleX(1);
+        } /* Erster Stopp links */
+        30% {
+          left: 40px;
+          bottom: 10px;
+          transform: scaleX(1);
+        } /* Bleibt stehen und bellt */
+        40% {
+          left: 40px;
+          bottom: 10px;
+          transform: scaleX(1);
+        }
+        45% {
+          left: 40px;
+          bottom: 10px;
+          transform: scaleX(-1);
+        } /* Dreht sich nach rechts um */
+        65% {
+          left: 60%;
+          bottom: 10px;
+          transform: scaleX(-1);
+        } /* Läuft bis zur Mitte/Rechts */
+        80% {
+          left: 60%;
+          bottom: 10px;
+          transform: scaleX(-1);
+        } /* ZWEITER STOPP: Bleibt noch mal stehen */
+        100% {
+          left: 110%;
+          bottom: 10px;
+          transform: scaleX(-1);
+        } /* Läuft aus dem Bild */
+      }
+
+      /* Das Watscheln/Wackeln beim Laufen (pausiert bei beiden Stopps) */
+      @keyframes dogWaddle {
+        0% {
+          transform: rotate(-5deg);
+        }
+        15% {
+          transform: rotate(5deg);
+        }
+        16% {
+          transform: rotate(0deg);
+        } /* Ruhig beim 1. Stopp */
+        44% {
+          transform: rotate(0deg);
+        }
+        45% {
+          transform: rotate(-5deg);
+        } /* Läuft wieder */
+        64% {
+          transform: rotate(5deg);
+        }
+        65% {
+          transform: rotate(0deg);
+        } /* Ruhig beim 2. Stopp */
+        79% {
+          transform: rotate(0deg);
+        }
+        80% {
+          transform: rotate(-5deg);
+        } /* Läuft zum Ausgang */
+        100% {
+          transform: rotate(5deg);
+        }
+      }
+
+      /* Kopf hochnehmen zum Bellen (nur beim 1. Stopp aktiv) */
+      @keyframes dogBark {
+        0%,
+        18%,
+        36%,
+        100% {
+          transform: rotate(0deg);
+        }
+        22%,
+        32% {
+          transform: rotate(-15deg);
+        }
+      }
+
+      /* Das Sprechblasen-Herz beim Bellen */
+      @keyframes barkHeart {
+        0%,
+        20%,
+        38%,
+        100% {
+          opacity: 0;
+          transform: scale(0) translateY(0);
+        }
+        24%,
+        30% {
+          opacity: 1;
+          transform: scale(1) translateY(-20px);
+        }
+      }
+
+      /* Hund Container */
+      .comic-dog-container {
+        position: fixed;
+        z-index: 999;
+        width: 120px;
+        height: 120px;
+        animation: dogWalkScenario 18s linear infinite; /* Zeit leicht erhöht für den extra Stopp */
+      }
+
+      .dog-body-group {
+        transform-origin: bottom center;
+        animation: dogWaddle 18s linear infinite;
+      }
+
+      .dog-head {
+        transform-origin: 45px 55px;
+        animation: dogBark 18s linear infinite;
+      }
+
+      .bark-effect {
+        fill: #ff1493;
+        transform-origin: 30px 30px;
+        animation: barkHeart 18s linear infinite;
+      }
+    </style>
+
+    <svg class="floating-heart heart1" viewBox="0 0 24 24">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
+    <svg class="floating-heart heart2" viewBox="0 0 24 24">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
+    <svg class="floating-heart heart3" viewBox="0 0 24 24">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
+    <svg class="floating-heart heart4" viewBox="0 0 24 24">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
+
+    <div class="comic-dog-container">
+      <svg width="120" height="120" viewBox="0 0 100 100">
+        <path
+          class="bark-effect"
+          d="M30 30l-1.4-1.3C23.5 24 20 21 20 17.5c0-3 2.5-5.5 5.5-5.5 1.7 0 3.4.8 4.5 2 1.1-1.2 2.8-2 4.5-2 3 0 5.5 2.5 5.5 5.5 0 3.5-3.5 6.5-8.6 11.2L30 30z"
+        />
+
+        <g class="dog-body-group">
+          <path
+            d="M 75 65 C 85 55, 90 60, 85 70"
+            stroke="#d2b48c"
+            stroke-width="6"
+            stroke-linecap="round"
+            fill="none"
+          />
+          <ellipse cx="65" cy="85" rx="6" ry="10" fill="#cd853f" />
+          <ellipse cx="40" cy="85" rx="6" ry="10" fill="#cd853f" />
+          <ellipse cx="55" cy="70" rx="25" ry="18" fill="#f4a460" />
+          <ellipse cx="70" cy="85" rx="6" ry="10" fill="#f4a460" />
+          <ellipse cx="45" cy="85" rx="6" ry="10" fill="#f4a460" />
+
+          <g class="dog-head">
+            <circle cx="35" cy="50" r="18" fill="#f4a460" />
+            <ellipse
+              cx="48"
+              cy="52"
+              rx="6"
+              ry="14"
+              fill="#cd853f"
+              transform="rotate(10 48 52)"
+            />
+            <ellipse cx="22" cy="54" rx="8" ry="6" fill="#ffdeb4" />
+            <circle cx="16" cy="52" r="3" fill="#000" />
+            <circle cx="28" cy="46" r="2.5" fill="#000" />
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div
+      style="
+        max-width: 1000px;
+        margin: 0 auto;
+        background: linear-gradient(
+          135deg,
+          rgba(230, 245, 233, 0.9) 0%,
+          rgba(200, 230, 205, 0.9) 100%
+        );
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+      "
+    >
+      <svg
+        width="60"
+        height="60"
+        viewBox="0 0 100 100"
+        style="vertical-align: middle; margin-right: 15px"
+      >
+        <g class="ghost-paw">
+          <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
+          <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
+          <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
+          <ellipse cx="75" cy="35" rx="10" ry="15" fill="#8a2be2" />
+          <path
+            d="M 50 48 C 25 28, 10 55, 50 85 C 90 55, 75 28, 50 48 Z"
+            fill="#8a2be2"
+          />
+        </g>
+      </svg>
+
+      <h1 style="display: inline; color: #1e3322">
+        Finde deinen besten haarigen Freund!
+      </h1>
+
+      <svg
+        width="60"
+        height="60"
+        viewBox="0 0 100 100"
+        style="vertical-align: middle; margin-left: 15px"
+      >
+        <g class="ghost-paw">
+          <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
+          <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
+          <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
+          <ellipse cx="75" cy="35" rx="10" ry="15" fill="#8a2be2" />
+          <path
+            d="M 50 48 C 25 28, 10 55, 50 85 C 90 55, 75 28, 50 48 Z"
+            fill="#8a2be2"
+          />
+        </g>
+      </svg>
+
+      <p style="font-size: 1.1em; color: #243d29">
+        Willkommen bei unserer Adoptionsagentur. Wir vermitteln Hunde mit Herz
+        an ein liebevolles Zuhause.
+      </p>
+
+      <h2 style="color: #1e3322">Über uns</h2>
+      <p style="color: #243d29">
+        Unsere Mission ist es, jedem Hund die Chance auf ein glückliches Leben
+        zu ermöglichen. Wir retten, pflegen und vermitteln Vierbeiner.
+      </p>
+
+      <h2 style="color: #1e3322">Warum von uns adoptieren?</h2>
+      <ul style="color: #243d29; line-height: 1.6">
+        <li>Umfassende tierärztliche Untersuchungen</li>
+        <li>Verhaltenstraining für alle Hunde</li>
+        <li>Unterstützung auch nach der Adoption</li>
+      </ul>
+
+      <h2 style="color: #1e3322">Lerne unsere Hunde kennen</h2>
+      <div style="display: flex; gap: 15px; flex-wrap: wrap">
+        <img
+          src="https://placedog.net/500/350?id=4"
+          alt="Süßer brauner Hund"
+          width="300"
+          style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)"
+        />
+        <img
+          src="https://placedog.net/500/350?id=12"
+          alt="Kleiner weißer Welpe"
+          width="300"
+          style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)"
+        />
+        <img
+          src="https://placedog.net/500/350?id=5"
+          alt="Fröhlicher Mops"
+          width="300"
+          style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)"
+        />
+      </div>
+
+      <h2 style="color: #1e3322">Kontakt aufnehmen</h2>
+      <form
+        style="
+          background: rgba(0, 0, 0, 0.04);
+          padding: 20px;
+          border-radius: 8px;
+        "
+      >
+        <p style="color: #1e3322">
+          Name:<br />
+          <input
+            type="text"
+            placeholder="Dein Name"
+            style="
+              width: 100%;
+              max-width: 400px;
+              padding: 8px;
+              margin-top: 5px;
+              border: 1px solid #a3c2a9;
+              border-radius: 4px;
+            "
+          />
+        </p>
+
+        <p style="color: #1e3322">
+          E-Mail:<br />
+          <input
+            type="text"
+            placeholder="Deine E-Mail-Adresse"
+            style="
+              width: 100%;
+              max-width: 400px;
+              padding: 8px;
+              margin-top: 5px;
+              border: 1px solid #a3c2a9;
+              border-radius: 4px;
+            "
+          />
+        </p>
+
+        <p style="color: #1e3322">
+          Nachricht:<br />
+          <textarea
+            placeholder="Schreibe deine Nachricht hier..."
+            style="
+              width: 100%;
+              max-width: 500px;
+              height: 100px;
+              padding: 8px;
+              margin-top: 5px;
+              border: 1px solid #a3c2a9;
+              border-radius: 4px;
+            "
+          ></textarea>
+        </p>
+
+        <button
+          type="submit"
+          style="
+            background: #8a2be2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+          "
+        >
+          Abschicken
+        </button>
+      </form>
+
+      <footer
+        style="
+          margin-top: 30px;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          padding-top: 15px;
+          text-align: center;
+          color: #4a5d4e;
+        "
+      >
+        <p>© 2026 Dog Adoption Agency</p>
+      </footer>
+    </div>
+  </body>
+</html>
