@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speisekarte | Capy-Chino Café</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #000000;
+        background-image: url("capychino.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      header {
+        background-color: rgba(212, 163, 115, 0.95);
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      nav {
+        background-color: rgba(233, 216, 166, 0.95);
+        padding: 10px;
+        text-align: center;
+      }
+      nav a {
+        color: #4a3b32;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+      }
+      nav a:hover {
+        color: #d4a373;
+      }
+      main {
+        max-width: 800px;
+        width: 100%;
+        margin: 30px auto;
+        padding: 25px;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.92
+        ); /* Etwas weniger transparent, damit man die Karte super lesen kann */
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        flex: 1 0 auto;
+        z-index: 1;
+      }
+      h2 {
+        color: #4a3b32;
+        text-align: center;
+        border-bottom: 2px dashed #d4a373;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+      .menu-category {
+        margin: 30px 0;
+      }
+      .menu-category h3 {
+        color: #d4a373;
+        font-size: 1.4em;
+        margin-bottom: 15px;
+        border-left: 4px solid #4a3b32;
+        padding-left: 10px;
+      }
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 15px;
+      }
+      .menu-item-title {
+        font-weight: bold;
+        color: #4a3b32;
+        font-size: 1.1em;
+      }
+      .menu-item-price {
+        font-weight: bold;
+        color: #d4a373;
+        white-space: nowrap;
+        padding-left: 10px;
+      }
+      .menu-item-dots {
+        flex-grow: 1;
+        border-bottom: 1px dotted #ccc;
+        margin: 0 10px;
+      }
+      .menu-item-desc {
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 2px;
+        font-style: italic;
+      }
+      .extra-note {
+        text-align: center;
+        background-color: #fbf8f3;
+        border: 1px solid #e9d8a6;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 0.95em;
+        color: #4a3b32;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9em;
+        background-color: rgba(212, 163, 115, 0.95);
+        color: white;
+        flex-shrink: 0;
+        z-index: 2;
+      }
+
+      /* CSS-Container für das Wellness-Capybara unten links */
+      .vector-capy-container {
+        position: fixed;
+        bottom: 30px;
+        left: 20px;
+        width: 180px;
+        height: 180px;
+        z-index: 10;
+      }
+
+      /*--- ANIMATIONEN ---*/
+      @keyframes cozyFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-4px) rotate(1deg);
+        }
+      }
+      .capy-group {
+        animation: cozyFloat 3.5s ease-in-out infinite;
+        transform-origin: 100px 130px;
+      }
+      @keyframes eyeBlink {
+        0%,
+        90%,
+        100% {
+          transform: scaleY(1);
+        }
+        93%,
+        95% {
+          transform: scaleY(0.1);
+        }
+      }
+      .capy-eye {
+        animation: eyeBlink 4.5s ease-in-out infinite;
+        transform-origin: 95px 95px;
+      }
+      @keyframes earMove {
+        0%,
+        92%,
+        100% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(-6deg);
+        }
+      }
+      .capy-ear {
+        animation: earMove 5s ease-in-out infinite;
+        transform-origin: 58px 76px;
+      }
+      @keyframes steamUp {
+        0% {
+          transform: translateY(0) scaleX(1);
+          opacity: 0;
+        }
+        15% {
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateY(-10px) scaleX(1.1);
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-20px) scaleX(0.8);
+          opacity: 0;
+        }
+      }
+      .steam-1 {
+        animation: steamUp 3s ease-in-out infinite;
+      }
+      .steam-2 {
+        animation: steamUp 3s ease-in-out infinite 1.5s;
+      }
+      @keyframes orangeFloat {
+        0%,
+        100% {
+          transform: rotate(0deg) translateY(0);
+        }
+        50% {
+          transform: rotate(8deg) translateY(1px);
+        }
+      }
+      .floating-orange {
+        animation: orangeFloat 4s ease-in-out infinite;
+        transform-origin: 140px 135px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Capy-Chino 🍊</h1>
+      <p>Don't worry, be Capy.</p>
+    </header>
+
+    <nav>
+      <a href="index.html">Startseite</a>
+      <a href="crew.html">Unsere Capy-Crew</a>
+      <a href="menue.html">Speisekarte</a>
+      <a href="about.html">Über uns</a>
+      <a href="contact.html">Kontakt</a>
+    </nav>
+
+    <main>
+      <h2>Unsere gechillten Köstlichkeiten</h2>
+
+      <div class="menu-category">
+        <h3>Warme Seelenwärmer (Kaffee & Co.)</h3>
+
+        <div>
+          <div class="menu-item">
+            <span class="menu-item-title">Der klassische Capy-Chino</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">4,80 €</span>
+          </div>
+          <div class="menu-item-desc">
+            Ein cremiger Cappuccino mit extra viel Milchschaum, verziert mit
+            einem Kakao-Capybara-Gesicht.
+          </div>
+        </div>
+
+        <div style="margin-top: 15px">
+          <div class="menu-item">
+            <span class="menu-item-title">Matcha-Deep-Relax-Latte</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">5,20 €</span>
+          </div>
+          <div class="menu-item-desc">
+            Grüner Matcha Tee, so beruhigend, dass selbst unsere Nagetiere
+            eifersüchtig werden.
+          </div>
+        </div>
+
+        <div style="margin-top: 15px">
+          <div class="menu-item">
+            <span class="menu-item-title">Orangen-Onsen-Espresso</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">3,90 €</span>
+          </div>
+          <div class="menu-item-desc">
+            Ein kräftiger Espresso auf Eis, serviert mit einer frischen
+            Orangenscheibe – inspiriert von unseren Lieblings-Heißbädern.
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h3>Flauschiges Gebäck (Kuchen & Snacks)</h3>
+
+        <div>
+          <div class="menu-item">
+            <span class="menu-item-title">Wasserschwein-Waffel</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">5,50 €</span>
+          </div>
+          <div class="menu-item-desc">
+            Frisch gebackene, dicke Waffel in Form eines schlafenden Capybaras.
+            Serviert mit Puderzucker und heißen Kirschen.
+          </div>
+        </div>
+
+        <div style="margin-top: 15px">
+          <div class="menu-item">
+            <span class="menu-item-title">"Chilli-Milli" Karottenkuchen</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">4,20 €</span>
+          </div>
+          <div class="menu-item-desc">
+            Saftiger Rübli-Kuchen, direkt aus der Nager-Testküche freigegeben.
+            Knackig, süß und garantiert stressfrei.
+          </div>
+        </div>
+
+        <div style="margin-top: 15px">
+          <div class="menu-item">
+            <span class="menu-item-title">Orangen-Donut der Gelassenheit</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">3,80 €</span>
+          </div>
+          <div class="menu-item-desc">
+            Ein fluffiger Donut mit fruchtiger Orangenglasur. Sieht aus wie ein
+            Mini-Schwimmreifen für den perfekten Wellness-Tag.
+          </div>
+        </div>
+      </div>
+
+      <div class="extra-note">
+        <strong>💡 Nager-Hinweis:</strong> Alle Kaffeespezialitäten sind ohne
+        Aufpreis auch mit Hafer- oder Mandelmilch erhältlich. Krümel auf dem
+        Tisch werden von der Crew persönlich ignoriert (wir sind zu entspannt
+        zum Putzen).
+      </div>
+    </main>
+
+    <div class="vector-capy-container">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 200 200"
+        width="100%"
+        height="100%"
+      >
+        <path
+          class="steam-1"
+          d="M 65 75 Q 60 65 65 55 T 60 40"
+          stroke="#FFF"
+          stroke-width="3"
+          stroke-linecap="round"
+          fill="none"
+          opacity="0"
+        />
+        <path
+          class="steam-2"
+          d="M 135 75 Q 130 65 135 55 T 130 40"
+          stroke="#FFF"
+          stroke-width="3"
+          stroke-linecap="round"
+          fill="none"
+          opacity="0"
+        />
+
+        <ellipse cx="100" cy="120" rx="65" ry="15" fill="#FFF" />
+        <ellipse cx="100" cy="122" rx="60" ry="12" fill="#5c3a21" />
+
+        <g class="capy-group">
+          <ellipse cx="70" cy="122" rx="6" ry="8" fill="#7d4f37" />
+          <ellipse cx="110" cy="122" rx="6" ry="8" fill="#7d4f37" />
+
+          <path
+            d="M 55 125 C 50 100, 60 75, 95 75 C 130 75, 145 95, 145 125 Z"
+            fill="#966246"
+          />
+
+          <path
+            d="M 110 85 C 125 87, 148 92, 148 112 C 148 126, 125 126, 110 124 Z"
+            fill="#825136"
+          />
+
+          <g class="capy-ear">
+            <ellipse
+              cx="58"
+              cy="78"
+              rx="10"
+              ry="7"
+              fill="#6e422a"
+              transform="rotate(20 58 78)"
+            />
+            <ellipse
+              cx="59"
+              cy="78"
+              rx="6"
+              ry="4"
+              fill="#ab7659"
+              transform="rotate(20 59 78)"
+            />
+          </g>
+
+          <g class="capy-eye">
+            <circle cx="95" cy="95" r="7.5" fill="#24140d" />
+            <circle cx="92.5" cy="92.5" r="2.8" fill="#FFFFFF" />
+            <circle cx="97.5" cy="97.5" r="1.2" fill="#FFFFFF" />
+          </g>
+
+          <ellipse cx="143" cy="103" rx="4.5" ry="3.5" fill="#24140d" />
+          <path
+            d="M 143 107 C 140 112, 134 112, 131 109"
+            stroke="#24140d"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            fill="none"
+          />
+          <path
+            d="M 143 107 C 145 110, 147 109, 149 108"
+            stroke="#24140d"
+            stroke-width="2"
+            stroke-linecap="round"
+            fill="none"
+          />
+
+          <ellipse
+            cx="110"
+            cy="110"
+            rx="11"
+            ry="7"
+            fill="#ff4d6d"
+            opacity="0.45"
+          />
+          <circle cx="106" cy="108" r="1" fill="#FFF" />
+          <circle cx="110" cy="107" r="1" fill="#FFF" />
+          <circle cx="108" cy="111" r="1" fill="#FFF" />
+
+          <g>
+            <circle cx="95" cy="64" r="11" fill="#ff8c00" />
+            <circle cx="94" cy="63" r="9" fill="#ffa502" />
+            <path
+              d="M 95 53 Q 98 48 103 49"
+              stroke="#2ed573"
+              stroke-width="2"
+              fill="none"
+            />
+            <circle cx="98" cy="60" r="1.5" fill="#FFF" opacity="0.6" />
+          </g>
+        </g>
+
+        <g class="floating-orange">
+          <circle cx="140" cy="130" r="14" fill="#ff8c00" />
+          <circle cx="140" cy="130" r="12" fill="#ffa502" />
+          <path
+            d="M 140 130 L 140 119 M 140 130 L 151 133 M 140 130 L 132 138"
+            stroke="#ff8c00"
+            stroke-width="1.5"
+          />
+          <circle cx="137" cy="126" r="1.5" fill="#FFF" opacity="0.5" />
+        </g>
+
+        <path
+          d="M 35 120 C 35 165, 45 175, 100 175 C 155 175, 165 165, 165 120 Z"
+          fill="#F9F6F0"
+        />
+        <path
+          d="M 164 130 C 185 130, 185 155, 162 155"
+          stroke="#F9F6F0"
+          stroke-width="10"
+          fill="none"
+          stroke-linecap="round"
+        />
+        <path
+          d="M 100 152 C 98 147, 92 145, 92 149 C 92 153, 100 158, 100 158 C 100 158, 108 153, 108 149 C 108 145, 102 147, 100 152 Z"
+          fill="#ff4d6d"
+          opacity="0.8"
+        />
+
+        <circle cx="45" cy="126" r="4" fill="#eccc68" opacity="0.7" />
+        <circle cx="51" cy="128" r="2.5" fill="#eccc68" opacity="0.7" />
+        <circle cx="158" cy="127" r="3.5" fill="#eccc68" opacity="0.7" />
+      </svg>
+    </div>
+
+    <footer>
+      <p>© 2026 Capy-Chino Café. Alle Rechte vorbehalten.</p>
+    </footer>
+  </body>
+</html>
