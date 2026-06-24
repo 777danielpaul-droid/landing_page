@@ -1,20 +1,9 @@
 <!doctype html>
-<html>
+<html lang="de">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dog Adoption Agency</title>
-  </head>
-  <body
-    style="
-      background: url(&quot;https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&quot;)
-        no-repeat center center fixed;
-      background-size: cover;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-      overflow-x: hidden;
-      min-height: 100vh;
-    "
-  >
     <style>
       /* --- Herzen Animationen --- */
       @keyframes heartPulse {
@@ -98,7 +87,6 @@
           opacity: 0.8;
         }
       }
-      /* Die Klasse liegt jetzt direkt auf dem SVG-Element */
       .pulsing-paw-svg {
         vertical-align: middle;
         display: inline-block;
@@ -107,8 +95,6 @@
       }
 
       /* --- COMIC HUND ANIMATIONEN --- */
-
-      /* Haupt-Ablaufsteuerung */
       @keyframes dogWalkScenario {
         0% {
           left: -150px;
@@ -119,12 +105,12 @@
           left: 40px;
           bottom: 10px;
           transform: scaleX(1);
-        } /* 1. Stopp links */
+        }
         30% {
           left: 40px;
           bottom: 10px;
           transform: scaleX(1);
-        } /* Bellt */
+        }
         40% {
           left: 40px;
           bottom: 10px;
@@ -134,25 +120,23 @@
           left: 40px;
           bottom: 10px;
           transform: scaleX(-1);
-        } /* Dreht sich nach rechts um */
+        }
         60% {
           left: 45%;
           bottom: 10px;
           transform: scaleX(-1);
-        } /* Läuft in die Mitte */
+        }
         80% {
           left: 45%;
           bottom: 10px;
           transform: scaleX(-1);
-        } /* 2. Stopp in der Mitte */
+        }
         100% {
           left: 110%;
           bottom: 10px;
           transform: scaleX(-1);
-        } /* Läuft rechts raus */
+        }
       }
-
-      /* Watscheln beim Laufen */
       @keyframes dogWaddle {
         0% {
           transform: rotate(-5deg);
@@ -185,8 +169,6 @@
           transform: rotate(5deg);
         }
       }
-
-      /* Kopf hochnehmen zum Bellen (nur beim 1. Stopp) */
       @keyframes dogBark {
         0%,
         18%,
@@ -199,8 +181,6 @@
           transform: rotate(-15deg);
         }
       }
-
-      /* Das Sprechblasen-Herz kombiniert Erscheinen, Aufsteigen und Atmen/Pulsieren */
       @keyframes barkHeartCombined {
         0%,
         20%,
@@ -226,8 +206,6 @@
           transform: translate(-5px, -20px) scale(1);
         }
       }
-
-      /* ANIMATION FÜR DIE FRONTANSICHT */
       @keyframes dogFaceFront {
         0%,
         59%,
@@ -252,8 +230,6 @@
           opacity: 0;
         }
       }
-
-      /* Zungen-Wechsel */
       @keyframes tongueOut {
         0%,
         67%,
@@ -267,7 +243,6 @@
         }
       }
 
-      /* Hund Container */
       .comic-dog-container {
         position: fixed;
         z-index: 999;
@@ -276,58 +251,65 @@
         animation: dogWalkScenario 18s linear infinite;
         overflow: visible;
       }
-
       .dog-body-group {
         transform-origin: bottom center;
         animation: dogWaddle 18s linear infinite;
       }
-
       .dog-head-profile {
         transform-origin: 45px 55px;
         animation: dogBark 18s linear infinite;
       }
-
       .view-profile {
         animation: dogFaceProfile 18s step-end infinite;
       }
       .view-front {
         animation: dogFaceFront 18s step-end infinite;
       }
-
       .bark-effect {
         fill: #ff1493;
         transform-origin: 30px 30px;
         animation: barkHeartCombined 18s linear infinite;
       }
-
       .dog-tongue {
         transform-origin: 35px 56px;
         animation: tongueOut 18s ease-in-out infinite;
       }
     </style>
+  </head>
+  <body
+    style="
+      background: url(&quot;https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&quot;)
+        no-repeat center center fixed;
+      background-size: cover;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      min-height: 100vh;
+    "
+  >
+    <svg class="floating-heart heart1" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
+    <svg class="floating-heart heart2" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
+    <svg class="floating-heart heart3" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
+    <svg class="floating-heart heart4" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      />
+    </svg>
 
-    <svg class="floating-heart heart1" viewBox="0 0 24 24">
-      <path
-        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-      />
-    </svg>
-    <svg class="floating-heart heart2" viewBox="0 0 24 24">
-      <path
-        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-      />
-    </svg>
-    <svg class="floating-heart heart3" viewBox="0 0 24 24">
-      <path
-        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-      />
-    </svg>
-    <svg class="floating-heart heart4" viewBox="0 0 24 24">
-      <path
-        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-      />
-    </svg>
-
-    <div class="comic-dog-container">
+    <div class="comic-dog-container" aria-hidden="true">
       <svg
         width="120"
         height="150"
@@ -417,159 +399,196 @@
         z-index: 2;
       "
     >
-      <svg
-        class="pulsing-paw-svg"
-        width="60"
-        height="60"
-        viewBox="0 0 100 100"
-        style="margin-right: 15px"
-      >
-        <g>
-          <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
-          <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
-          <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
-          <ellipse cx="75" cy="35" rx="10" ry="15" fill="#8a2be2" />
-          <path
-            d="M 50 48 C 25 28, 10 55, 50 85 C 90 55, 75 28, 50 48 Z"
-            fill="#8a2be2"
-          />
-        </g>
-      </svg>
-
-      <h1 style="display: inline; color: #1e3322">
-        Finde deinen besten haarigen Freund!
-      </h1>
-
-      <svg
-        class="pulsing-paw-svg"
-        width="60"
-        height="60"
-        viewBox="0 0 100 100"
-        style="margin-left: 15px"
-      >
-        <g>
-          <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
-          <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
-          <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
-          <ellipse cx="75" cy="35" rx="10" ry="15" fill="#8a2be2" />
-          <path
-            d="M 50 48 C 25 28, 10 55, 50 85 C 90 55, 75 28, 50 48 Z"
-            fill="#8a2be2"
-          />
-        </g>
-      </svg>
-
-      <p style="font-size: 1.1em; color: #243d29">
-        Willkommen bei unserer Adoptionsagentur. Wir vermitteln Hunde mit Herz
-        an ein liebevolles Zuhause.
-      </p>
-
-      <h2 style="color: #1e3322">Über uns</h2>
-      <p style="color: #243d29">
-        Unsere Mission ist es, jedem Hund die Chance auf ein glückliches Leben
-        zu ermöglichen. Wir retten, pflegen und vermitteln Vierbeiner.
-      </p>
-
-      <h2 style="color: #1e3322">Warum von uns adoptieren?</h2>
-      <ul style="color: #243d29; line-height: 1.6">
-        <li>Umfassende tierärztliche Untersuchungen</li>
-        <li>Verhaltenstraining für alle Hunde</li>
-        <li>Unterstützung auch nach der Adoption</li>
-      </ul>
-
-      <h2 style="color: #1e3322">Lerne unsere Hunde kennen</h2>
-      <div style="display: flex; gap: 15px; flex-wrap: wrap">
-        <img
-          src="https://placedog.net/500/350?id=4"
-          alt="Süßer brauner Hund"
-          width="300"
-          style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)"
-        />
-        <img
-          src="https://placedog.net/500/350?id=12"
-          alt="Kleiner weißer Welpe"
-          width="300"
-          style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)"
-        />
-        <img
-          src="https://placedog.net/500/350?id=5"
-          alt="Fröhlicher Mops"
-          width="300"
-          style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)"
-        />
-      </div>
-
-      <h2 style="color: #1e3322">Kontakt aufnehmen</h2>
-      <form
-        style="
-          background: rgba(0, 0, 0, 0.04);
-          padding: 20px;
-          border-radius: 8px;
-        "
-      >
-        <p style="color: #1e3322">
-          Name:<br />
-          <input
-            type="text"
-            placeholder="Dein Name"
-            style="
-              width: 100%;
-              max-width: 400px;
-              padding: 8px;
-              margin-top: 5px;
-              border: 1px solid #a3c2a9;
-              border-radius: 4px;
-            "
-          />
-        </p>
-
-        <p style="color: #1e3322">
-          E-Mail:<br />
-          <input
-            type="text"
-            placeholder="Deine E-Mail-Adresse"
-            style="
-              width: 100%;
-              max-width: 400px;
-              padding: 8px;
-              margin-top: 5px;
-              border: 1px solid #a3c2a9;
-              border-radius: 4px;
-            "
-          />
-        </p>
-
-        <p style="color: #1e3322">
-          Nachricht:<br />
-          <textarea
-            placeholder="Schreibe deine Nachricht hier..."
-            style="
-              width: 100%;
-              max-width: 500px;
-              height: 100px;
-              padding: 8px;
-              margin-top: 5px;
-              border: 1px solid #a3c2a9;
-              border-radius: 4px;
-            "
-          ></textarea>
-        </p>
-
-        <button
-          type="submit"
-          style="
-            background: #8a2be2;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-          "
+      <header>
+        <svg
+          class="pulsing-paw-svg"
+          width="60"
+          height="60"
+          viewBox="0 0 100 100"
+          style="margin-right: 15px"
+          aria-hidden="true"
         >
-          Abschicken
-        </button>
-      </form>
+          <g>
+            <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
+            <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
+            <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
+            <ellipse cx="75" cy="35" rx="10" ry="15" fill="#8a2be2" />
+            <path
+              d="M 50 48 C 25 28, 10 55, 50 85 C 90 55, 75 28, 50 48 Z"
+              fill="#8a2be2"
+            />
+          </g>
+        </svg>
+
+        <h1 style="display: inline; color: #1e3322">
+          Finde deinen besten haarigen Freund!
+        </h1>
+
+        <svg
+          class="pulsing-paw-svg"
+          width="60"
+          height="60"
+          viewBox="0 0 100 100"
+          style="margin-left: 15px"
+          aria-hidden="true"
+        >
+          <g>
+            <ellipse cx="25" cy="35" rx="10" ry="15" fill="#8a2be2" />
+            <ellipse cx="42" cy="20" rx="10" ry="16" fill="#8a2be2" />
+            <ellipse cx="58" cy="20" rx="10" ry="16" fill="#8a2be2" />
+            <ellipse cx="75" cy="35" rx="10" ry="15" fill="#8a2be2" />
+            <path
+              d="M 50 48 C 25 28, 10 55, 50 85 C 90 55, 75 28, 50 48 Z"
+              fill="#8a2be2"
+            />
+          </g>
+        </svg>
+
+        <p style="font-size: 1.1em; color: #243d29; margin-top: 15px">
+          Willkommen bei unserer Adoptionsagentur. Wir vermitteln Hunde mit Herz
+          an ein liebevolles Zuhause.
+        </p>
+      </header>
+
+      <main>
+        <section style="margin-top: 30px">
+          <h2 style="color: #1e3322">Über uns</h2>
+          <p style="color: #243d29">
+            Unsere Mission ist es, jedem Hund die Chance auf ein glückliches
+            Leben zu ermöglichen. Wir retten, pflegen und vermitteln Vierbeiner.
+          </p>
+        </section>
+
+        <section style="margin-top: 30px">
+          <h2 style="color: #1e3322">Warum von uns adoptieren?</h2>
+          <ul style="color: #243d29; line-height: 1.6">
+            <li>Umfassende tierärztliche Untersuchungen</li>
+            <li>Verhaltenstraining für alle Hunde</li>
+            <li>Unterstützung auch nach der Adoption</li>
+          </ul>
+        </section>
+
+        <section style="margin-top: 30px">
+          <h2 style="color: #1e3322">Lerne unsere Hunde kennen</h2>
+          <div style="display: flex; gap: 15px; flex-wrap: wrap">
+            <article>
+              <img
+                src="https://placedog.net/500/350?id=4"
+                alt="Süßer brauner Hund, der auf ein neues Zuhause wartet"
+                width="300"
+                style="
+                  border-radius: 8px;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                "
+              />
+            </article>
+
+            <article>
+              <img
+                src="https://placedog.net/500/350?id=12"
+                alt="Kleiner weißer Welpe, der fröhlich in die Kamera schaut"
+                width="300"
+                style="
+                  border-radius: 8px;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                "
+              />
+            </article>
+
+            <article>
+              <img
+                src="https://placedog.net/500/350?id=5"
+                alt="Fröhlicher Mops mit ausgestreckter Zunge"
+                width="300"
+                style="
+                  border-radius: 8px;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                "
+              />
+            </article>
+          </div>
+        </section>
+
+        <section style="margin-top: 30px">
+          <h2 style="color: #1e3322">Kontakt aufnehmen</h2>
+          <form
+            style="
+              background: rgba(0, 0, 0, 0.04);
+              padding: 20px;
+              border-radius: 8px;
+            "
+          >
+            <p style="color: #1e3322">
+              <label for="name">Name:</label><br />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Dein Name"
+                style="
+                  width: 100%;
+                  max-width: 400px;
+                  padding: 8px;
+                  margin-top: 5px;
+                  border: 1px solid #a3c2a9;
+                  border-radius: 4px;
+                "
+              />
+            </p>
+
+            <p style="color: #1e3322">
+              <label for="email">E-Mail:</label><br />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Deine E-Mail-Adresse"
+                style="
+                  width: 100%;
+                  max-width: 400px;
+                  padding: 8px;
+                  margin-top: 5px;
+                  border: 1px solid #a3c2a9;
+                  border-radius: 4px;
+                "
+              />
+            </p>
+
+            <p style="color: #1e3322">
+              <label for="message">Nachricht:</label><br />
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Schreibe deine Nachricht hier..."
+                style="
+                  width: 100%;
+                  max-width: 500px;
+                  height: 100px;
+                  padding: 8px;
+                  margin-top: 5px;
+                  border: 1px solid #a3c2a9;
+                  border-radius: 4px;
+                "
+              ></textarea>
+            </p>
+
+            <button
+              type="submit"
+              style="
+                background: #8a2be2;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+              "
+            >
+              Abschicken
+            </button>
+          </form>
+        </section>
+      </main>
 
       <footer
         style="
